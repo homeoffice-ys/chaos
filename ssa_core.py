@@ -11,6 +11,7 @@ import numpy as np
 try:
     from matplotlib import pyplot as plt
     import pylab
+    # import matplotlib.pyplot as plt
 except:
     print("Plotting functions will be disabled. Can't import matplotlib")
     pass
@@ -197,6 +198,7 @@ def ssa_cutoff_order(x: np.ndarray, dim=200, cutoff_pctl=75, show_plot=False):
         plt.xlabel('Number of Order')
         plt.vlines(n_cutoff, 0, max(curve), 'g', linestyles='dotted')
         plt.text(dim*0.6, max(curve)*0.9, 'Cutoff order: %d' % n_cutoff)
+        plt.show()
         
     return n_cutoff
 
@@ -236,7 +238,7 @@ def ssaview(y, dim, k):
 
     # resuduals qq-plot
     plt.subplot2grid((3, 3), (0, 2), rowspan=2)
-    stats.probplot(y - yr, dist="norm", plot=pylab)
+    stats.probplot(y - yr, dist="norm", plot=plt)
     plt.title('Residuals QQ plot')
 
     # singular values
@@ -245,3 +247,5 @@ def ssaview(y, dim, k):
     plt.plot(100 * s / s.sum(), 'g', marker='*', lw=1, alpha=0.6)
     plt.xlabel('Eigenvalue number')
     plt.ylabel('Eigenvalue')
+
+    plt.show()
