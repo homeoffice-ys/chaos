@@ -3,6 +3,7 @@ import os
 import pandas as pd
 import quandl
 from ssa_core import ssa, ssa_predict, ssaview, inv_ssa, ssa_cutoff_order
+import numpy as np
 
 def mape(f, t):
     return 100*((f - t)/t).abs().sum()/len(t)
@@ -12,9 +13,6 @@ def mae(f, t):
 
 filename = 'EURUSD-2019-02.csv'
 full_path = r'C:\Users\Yochanan\Documents\Data\EURUSD'
-
-
-# yrd
 
 df = pd.read_csv(os.path.join(full_path, filename))
 print(df.columns)
@@ -26,12 +24,16 @@ test_date = df['datetime'].values[800000] # '20190201 16:19:50.787'
 
 print(test_date)
 
-nvalues = 1258
+n_values = 2000
 
-train_d = df.loc[(df.datetime <= test_date)]
-train_d = df['high']
-test_d = df.loc[(df.datetime > test_date)]
-test_d = test_d['high']
+# train_d = df.loc[(df.datetime <= test_date)]
+# train_d = df['high']
+# test_d = df.loc[(df.datetime > test_date)]
+# test_d = test_d['high']
+
+train_d = df['high'][:n_values]
+test_d = df['high'][:n_values+n_values]
+test_d = test_d.reindex(np.arange(n_values, 2*n_values))
 
 plt.plot(train_d, label='Train')
 plt.plot(test_d, 'r', label='Test')
