@@ -8,6 +8,9 @@ from ssa_core import ssa, ssa_predict, ssaview, inv_ssa, ssa_cutoff_order
 filename = 'EURUSD-2019-02.csv'
 full_path = r'C:\Users\Yochanan\Documents\Data\EURUSD'
 
+
+# yrd
+
 df = pd.read_csv(os.path.join(full_path, filename))
 print(df.columns)
 
