@@ -24,7 +24,7 @@ test_date = df['datetime'].values[800000] # '20190201 16:19:50.787'
 
 print(test_date)
 
-n_values = 2000
+n_values = 1258
 
 # train_d = df.loc[(df.datetime <= test_date)]
 # train_d = df['high']
@@ -79,7 +79,7 @@ n_co = ssa_cutoff_order(train_d, dim=MAX_LAG_NUMBER, show_plot=True)
 
 
 days_to_predict = 15
-forecast = ssa_predict(train_d, n_co, list(range(8)), days_to_predict, 1e-5)
+forecast = ssa_predict(train_d.values, n_co, list(range(8)), days_to_predict, 1e-5)
 
 prev_ser = closes[datetime.date.isoformat(parser.parse(test_date) - timedelta(120)):test_date]
 plt.plot(prev_ser, label='Train Data')
