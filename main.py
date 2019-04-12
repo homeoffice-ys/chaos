@@ -4,6 +4,11 @@ import pandas as pd
 import quandl
 from ssa_core import ssa, ssa_predict, ssaview, inv_ssa, ssa_cutoff_order
 
+def mape(f, t):
+    return 100*((f - t)/t).abs().sum()/len(t)
+
+def mae(f, t):
+    return 100*((f - t)).abs().sum()/len(t)
 
 filename = 'EURUSD-2019-02.csv'
 full_path = r'C:\Users\Yochanan\Documents\Data\EURUSD'
