@@ -20,11 +20,10 @@ def fig(w=16, h=5, dpi=96, facecolor=None, edgecolor=None):
 
 
 def mape(f, t):
-    return 100*(f - t)/t.abs().sum()/len(t)
-
+    return 100*((f - t)/t).abs().sum()/len(t)
 
 def mae(f, t):
-    return 100*(f - t).abs().sum()/len(t)
+    return 100*((f - t)).abs().sum()/len(t)
 
 
 instrument = 'MSFT'
