@@ -67,7 +67,6 @@ forecast = ssa_predict(train_d.values, n_co, list(range(8)), days_to_predict, 1e
 prev_ser = closes[datetime.date.isoformat(parser.parse(test_date) - timedelta(120)):test_date]
 plt.plot(prev_ser, label='Train Data')
 
-test_d = closes[test_date:]
 f_ser = pd.DataFrame(data=forecast, index=test_d.index[:days_to_predict], columns=['close'])
 orig = pd.DataFrame(test_d[:days_to_predict])
 
