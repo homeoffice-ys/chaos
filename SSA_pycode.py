@@ -49,15 +49,6 @@ noise = train_d.values - reconstructed
 plt.hist(noise, 50)
 plt.show()
 
-pc, _, v = ssa(train_d.values, 120)
-reconstructed = inv_ssa(pc, v, [0,1,2,3])
-noise = train_d.values - reconstructed
-plt.hist(noise, 50)
-plt.show()
-
-MAX_LAG_NUMBER = 120 # 4*30 = 1 quarter max
-n_co = ssa_cutoff_order(train_d.values, dim=MAX_LAG_NUMBER, show_plot=True)
-
 MAX_LAG_NUMBER = 120 # 4*30 = 1 quarter max
 n_co = ssa_cutoff_order(train_d.values, dim=MAX_LAG_NUMBER, show_plot=True)
 
