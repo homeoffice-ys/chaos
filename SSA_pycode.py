@@ -9,7 +9,6 @@ from dateutil import parser
 
 
 # matplotlib inline
-
 # customize mpl a bit
 # set_mpl_theme('light')
 
@@ -34,13 +33,6 @@ test_date = '2017-01-01'
 
 train_d = closes[:test_date]
 test_d = closes[test_date:]
-
-# fig(16, 3)
-# plt.plot(train_d, label='Train')
-# plt.plot(test_d, 'r', label='Test')
-# plt.title('%s adjusted daily close prices' % instrument)
-# plt.legend()
-# plt.show()
 
 plt.plot(train_d, label='Train')
 plt.plot(test_d, 'r', label='Test')
@@ -68,7 +60,6 @@ n_co = ssa_cutoff_order(train_d.values, dim=MAX_LAG_NUMBER, show_plot=True)
 
 MAX_LAG_NUMBER = 120 # 4*30 = 1 quarter max
 n_co = ssa_cutoff_order(train_d.values, dim=MAX_LAG_NUMBER, show_plot=True)
-
 
 days_to_predict = 15
 forecast = ssa_predict(train_d.values, n_co, list(range(8)), days_to_predict, 1e-5)
