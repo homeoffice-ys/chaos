@@ -8,9 +8,6 @@ from ssa_core import ssa, ssa_predict, ssaview, inv_ssa, ssa_cutoff_order
 filename = 'EURUSD-2019-02.csv'
 full_path = r'C:\Users\Yochanan\Documents\Data\EURUSD'
 
-
-# yrd
-
 df = pd.read_csv(os.path.join(full_path, filename))
 print(df.columns)
 
@@ -69,7 +66,6 @@ n_co = ssa_cutoff_order(train_d, dim=MAX_LAG_NUMBER, show_plot=True)
 
 MAX_LAG_NUMBER = 120 # 4*30 = 1 quarter max
 n_co = ssa_cutoff_order(train_d, dim=MAX_LAG_NUMBER, show_plot=True)
-
 
 days_to_predict = 15
 forecast = ssa_predict(train_d, n_co, list(range(8)), days_to_predict, 1e-5)
