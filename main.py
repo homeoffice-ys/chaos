@@ -3,7 +3,13 @@ import os
 import pandas as pd
 import quandl
 from ssa_core import ssa, ssa_predict, ssaview, inv_ssa, ssa_cutoff_order
+import numpy as np
 
+def mape(f, t):
+    return 100*((f - t)/t).abs().sum()/len(t)
+
+def mae(f, t):
+    return 100*((f - t)).abs().sum()/len(t)
 
 filename = 'EURUSD-2019-02.csv'
 full_path = r'C:\Users\Yochanan\Documents\Data\EURUSD'
@@ -18,12 +24,16 @@ test_date = df['datetime'].values[800000] # '20190201 16:19:50.787'
 
 print(test_date)
 
-nvalues = 1258
+n_values = 1258
 
-train_d = df.loc[(df.datetime <= test_date)]
-train_d = df['high']
-test_d = df.loc[(df.datetime > test_date)]
-test_d = test_d['high']
+# train_d = df.loc[(df.datetime <= test_date)]
+# train_d = df['high']
+# test_d = df.loc[(df.datetime > test_date)]
+# test_d = test_d['high']
+
+train_d = df['high'][:n_values]
+test_d = df['high'][:n_values+n_values]
+test_d = test_d.reindex(np.arange(n_values, 2*n_values))
 
 plt.plot(train_d, label='Train')
 plt.plot(test_d, 'r', label='Test')
@@ -55,20 +65,11 @@ noise = train_d - reconstructed
 plt.hist(noise, 50)
 plt.show()
 
-pc, _, v = ssa(train_d, 120)
-reconstructed = inv_ssa(pc, v, [0,1,2,3])
-noise = train_d - reconstructed
-plt.hist(noise, 50)
-plt.show()
-
-MAX_LAG_NUMBER = 120 # 4*30 = 1 quarter max
-n_co = ssa_cutoff_order(train_d, dim=MAX_LAG_NUMBER, show_plot=True)
-
 MAX_LAG_NUMBER = 120 # 4*30 = 1 quarter max
 n_co = ssa_cutoff_order(train_d, dim=MAX_LAG_NUMBER, show_plot=True)
 
 days_to_predict = 15
-forecast = ssa_predict(train_d, n_co, list(range(8)), days_to_predict, 1e-5)
+forecast = ssa_predict(train_d.values, n_co, list(range(8)), days_to_predict, 1e-5)
 
 prev_ser = closes[datetime.date.isoformat(parser.parse(test_date) - timedelta(120)):test_date]
 plt.plot(prev_ser, label='Train Data')
