@@ -84,7 +84,7 @@ print('hello world 2')
 
 
 f_ser = pd.DataFrame(data=forecast, index=test_d.index[:samples_to_predict], columns=['close'])
-orig = pd.DataFrame(test_d[:days_to_predict])
+orig = pd.DataFrame(test_d[:samples_to_predict])
 
 plt.plot(orig, label='Test Data')
 plt.plot(f_ser, 'r-', marker='.', label='Forecast')
