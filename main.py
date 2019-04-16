@@ -74,20 +74,17 @@ forecast = ssa_predict(train_d.values, n_co, list(range(8)), samples_to_predict,
 # prev_ser = closes[datetime.date.isoformat(parser.parse(test_date) - timedelta(120)):test_date]
 # plt.plot(prev_ser, label='Train Data')
 
-plt.plot(forecast)
-plt.plot(test_d.values[:samples_to_predict])
-
-print('hello world')
-
-print('hello world 2')
-
-
-
-f_ser = pd.DataFrame(data=forecast, index=test_d.index[:samples_to_predict], columns=['close'])
-orig = pd.DataFrame(test_d[:samples_to_predict])
-
-plt.plot(orig, label='Test Data')
-plt.plot(f_ser, 'r-', marker='.', label='Forecast')
+plt.plot(forecast, label='forecast')
+plt.plot(test_d.values[:samples_to_predict], label='actual')
 plt.legend()
-plt.title('Forecasting %s for %d days, MAPE = %.2f%%' % (instrument, days_to_predict, mape(f_ser, orig)))
 plt.show()
+
+
+# f_ser = pd.DataFrame(data=forecast, index=test_d.index[:samples_to_predict], columns=['close'])
+# orig = pd.DataFrame(test_d[:samples_to_predict])
+#
+# plt.plot(orig, label='Test Data')
+# plt.plot(f_ser, 'r-', marker='.', label='Forecast')
+# plt.legend()
+# plt.title('Forecasting %s for %d days, MAPE = %.2f%%' % (instrument, days_to_predict, mape(f_ser, orig)))
+# plt.show()
