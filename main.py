@@ -79,6 +79,8 @@ plt.plot(test_d.values[:samples_to_predict])
 
 print('hello world')
 
+print('hello world 2')
+
 
 
 f_ser = pd.DataFrame(data=forecast, index=test_d.index[:days_to_predict], columns=['close'])
