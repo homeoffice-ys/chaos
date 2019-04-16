@@ -77,6 +77,8 @@ forecast = ssa_predict(train_d.values, n_co, list(range(8)), days_to_predict, 1e
 plt.plot(forecast)
 plt.plot(test_d.values[:samples_to_predict])
 
+print('hello world')
+
 
 
 f_ser = pd.DataFrame(data=forecast, index=test_d.index[:days_to_predict], columns=['close'])
