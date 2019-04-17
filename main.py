@@ -25,6 +25,8 @@ test_date = df['datetime'].values[800000] # '20190201 16:19:50.787'
 print(test_date)
 
 n_values = 1258
+MAX_LAG_NUMBER = 240 # 4*30 = 1 quarter max
+samples_to_predict = 20
 
 # train_d = df.loc[(df.datetime <= test_date)]
 # train_d = df['high']
@@ -57,18 +59,16 @@ plt.show()
 # plt.show()
 
 fig = plt.figure()
-ssaview(train_d, 120, [0,1,2,3])
+ssaview(train_d, MAX_LAG_NUMBER , [0,1,2,3])
 
-pc, _, v = ssa(train_d, 120)
+pc, _, v = ssa(train_d, MAX_LAG_NUMBER )
 reconstructed = inv_ssa(pc, v, [0,1,2,3])
 noise = train_d - reconstructed
 plt.hist(noise, 50)
 plt.show()
 
-MAX_LAG_NUMBER = 120 # 4*30 = 1 quarter max
 n_co = ssa_cutoff_order(train_d, dim=MAX_LAG_NUMBER, show_plot=True)
 
-samples_to_predict = 60
 forecast = ssa_predict(train_d.values, n_co, list(range(8)), samples_to_predict, 1e-5)
 
 # prev_ser = closes[datetime.date.isoformat(parser.parse(test_date) - timedelta(120)):test_date]
