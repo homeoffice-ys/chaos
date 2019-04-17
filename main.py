@@ -69,23 +69,22 @@ MAX_LAG_NUMBER = 120 # 4*30 = 1 quarter max
 n_co = ssa_cutoff_order(train_d, dim=MAX_LAG_NUMBER, show_plot=True)
 
 samples_to_predict = 60
-forecast = ssa_predict(train_d.values, n_co, list(range(8)), days_to_predict, 1e-5)
+forecast = ssa_predict(train_d.values, n_co, list(range(8)), samples_to_predict, 1e-5)
 
 # prev_ser = closes[datetime.date.isoformat(parser.parse(test_date) - timedelta(120)):test_date]
 # plt.plot(prev_ser, label='Train Data')
 
-plt.plot(forecast)
-plt.plot(test_d.values[:samples_to_predict])
-
-print('hello world')
-
-
-
-f_ser = pd.DataFrame(data=forecast, index=test_d.index[:days_to_predict], columns=['close'])
-orig = pd.DataFrame(test_d[:days_to_predict])
-
-plt.plot(orig, label='Test Data')
-plt.plot(f_ser, 'r-', marker='.', label='Forecast')
+plt.plot(forecast, label='forecast')
+plt.plot(test_d.values[:samples_to_predict], label='actual')
 plt.legend()
-plt.title('Forecasting %s for %d days, MAPE = %.2f%%' % (instrument, days_to_predict, mape(f_ser, orig)))
 plt.show()
+
+
+# f_ser = pd.DataFrame(data=forecast, index=test_d.index[:samples_to_predict], columns=['close'])
+# orig = pd.DataFrame(test_d[:samples_to_predict])
+#
+# plt.plot(orig, label='Test Data')
+# plt.plot(f_ser, 'r-', marker='.', label='Forecast')
+# plt.legend()
+# plt.title('Forecasting %s for %d days, MAPE = %.2f%%' % (instrument, days_to_predict, mape(f_ser, orig)))
+# plt.show()
