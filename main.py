@@ -4,6 +4,7 @@ import pandas as pd
 import quandl
 from ssa_core import ssa, ssa_predict, ssaview, inv_ssa, ssa_cutoff_order
 import numpy as np
+import config
 
 def mape(f, t):
     return 100*((f - t)/t).abs().sum()/len(t)
@@ -26,8 +27,10 @@ test_date = df['datetime'].values[800000] # '20190201 16:19:50.787'
 print(test_date)
 
 n_values = 1258
-MAX_LAG_NUMBER = 100  # 4*30 = 1 quarter max
-samples_to_predict = 20
+# MAX_LAG_NUMBER = 100  # 4*30 = 1 quarter max
+# samples_to_predict = 20
+MAX_LAG_NUMBER = config.dict['MAX_LAG_NUMBER']
+samples_to_predict = config.dict['samples_to_predict']
 
 # train_d = df.loc[(df.datetime <= test_date)]
 # train_d = df['high']
