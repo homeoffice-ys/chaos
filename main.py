@@ -5,6 +5,7 @@ import quandl
 from ssa_core import ssa, ssa_predict, ssaview, inv_ssa, ssa_cutoff_order
 import numpy as np
 import config
+from file_utilities import get_files
 
 def mape(f, t):
     return 100*((f - t)/t).abs().sum()/len(t)
@@ -12,6 +13,7 @@ def mape(f, t):
 def mae(f, t):
     return 100*((f - t)).abs().sum()/len(t)
 
+list = get_files()
 
 filename = 'EURUSD-2019-03.csv'
 full_path = r'C:\Users\Yochanan\Documents\Data\EURUSD'
@@ -29,8 +31,8 @@ print(test_date)
 n_values = 1258
 # MAX_LAG_NUMBER = 100  # 4*30 = 1 quarter max
 # samples_to_predict = 20
-MAX_LAG_NUMBER = config.dict['MAX_LAG_NUMBER']
-samples_to_predict = config.dict['samples_to_predict']
+MAX_LAG_NUMBER = config.config['MAX_LAG_NUMBER']
+samples_to_predict = config.config['samples_to_predict']
 
 # train_d = df.loc[(df.datetime <= test_date)]
 # train_d = df['high']
