@@ -11,13 +11,14 @@ def mape(f, t):
 def mae(f, t):
     return 100*((f - t)).abs().sum()/len(t)
 
-filename = 'EURUSD-2019-01.csv'
+
+filename = 'EURUSD-2019-03.csv'
 full_path = r'C:\Users\Yochanan\Documents\Data\EURUSD'
 
 df = pd.read_csv(os.path.join(full_path, filename))
 print(df.columns)
 
-# highs = df['datetime'].between('20190201','20190202')
+# highs = df['datetime'].between('20190203','20190202')
 # plt.plot(df['high'].values[highs])
 
 test_date = df['datetime'].values[800000] # '20190201 16:19:50.787'
@@ -25,7 +26,7 @@ test_date = df['datetime'].values[800000] # '20190201 16:19:50.787'
 print(test_date)
 
 n_values = 1258
-MAX_LAG_NUMBER = 240 # 4*30 = 1 quarter max
+MAX_LAG_NUMBER = 100  # 4*30 = 1 quarter max
 samples_to_predict = 20
 
 # train_d = df.loc[(df.datetime <= test_date)]
@@ -78,7 +79,7 @@ plt.plot(forecast, label='forecast')
 plt.plot(test_d.values[:samples_to_predict], label='actual')
 plt.legend()
 plt.show()
-
+print('The end')
 
 # f_ser = pd.DataFrame(data=forecast, index=test_d.index[:samples_to_predict], columns=['close'])
 # orig = pd.DataFrame(test_d[:samples_to_predict])
