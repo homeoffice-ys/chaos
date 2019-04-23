@@ -5,7 +5,7 @@ import quandl
 from ssa_core import ssa, ssa_predict, ssaview, inv_ssa, ssa_cutoff_order
 import numpy as np
 import config
-from file_utilities import get_files
+from offline import get_files
 
 def mape(f, t):
     return 100*((f - t)/t).abs().sum()/len(t)
@@ -14,6 +14,8 @@ def mae(f, t):
     return 100*((f - t)).abs().sum()/len(t)
 
 list = get_files()
+for f in list:
+    print(f)
 
 filename = 'EURUSD-2019-03.csv'
 full_path = r'C:\Users\Yochanan\Documents\Data\EURUSD'
