@@ -1,25 +1,32 @@
 import matplotlib.pyplot as plt
 import os
 import pandas as pd
-import quandl
+# import quandl
 from ssa_core import ssa, ssa_predict, ssaview, inv_ssa, ssa_cutoff_order
 import numpy as np
 import config
 from offline import get_files
 
+
 def mape(f, t):
+
     return 100*((f - t)/t).abs().sum()/len(t)
 
-def mae(f, t):
-    return 100*((f - t)).abs().sum()/len(t)
 
-list = get_files()
-for f in list:
+def mae(f, t):
+
+    return 100*(f - t).abs().sum()/len(t)
+
+
+dir_list = get_files()
+
+for f in dir_list:
     print(f)
+    df = pd.read_csv(os.path.join(config.config['hist_data_dir'], f))
+    plt.plot(df['high'])
 
 filename = 'EURUSD-2019-03.csv'
 full_path = r'C:\Users\Yochanan\Documents\Data\EURUSD'
-
 df = pd.read_csv(os.path.join(full_path, filename))
 print(df.columns)
 
@@ -31,10 +38,9 @@ test_date = df['datetime'].values[800000] # '20190201 16:19:50.787'
 print(test_date)
 
 n_values = 1258
-# MAX_LAG_NUMBER = 100  # 4*30 = 1 quarter max
-# samples_to_predict = 20
-MAX_LAG_NUMBER = config.config['MAX_LAG_NUMBER']
-samples_to_predict = config.config['samples_to_predict']
+
+MAX_LAG_NUMBER = config.ssa_params['MAX_LAG_NUMBER']
+samples_to_predict = config.ssa_params['samples_to_predict']
 
 # train_d = df.loc[(df.datetime <= test_date)]
 # train_d = df['high']

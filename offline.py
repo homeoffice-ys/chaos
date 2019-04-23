@@ -1,9 +1,9 @@
 import os
+import config
 
-data_dir = r'C:\Users\Yochanan\Documents\Data\EURUSD'
 
 def get_files():
-    print(data_dir)
-    return os.listdir(data_dir)
+
+    return os.listdir(config.config['hist_data_dir'])
 
 
