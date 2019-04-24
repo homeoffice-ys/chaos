@@ -24,6 +24,7 @@ for f in dir_list:
     print(f)
     df = pd.read_csv(os.path.join(config.config['hist_data_dir'], f))
     plt.plot(df['high'])
+    plt.show()
 
 filename = 'EURUSD-2019-03.csv'
 full_path = r'C:\Users\Yochanan\Documents\Data\EURUSD'
