@@ -24,6 +24,9 @@ for f in dir_list:
     print(f)
     df = pd.read_csv(os.path.join(config.config['hist_data_dir'], f))
     print(df.columns)
+    for idx in range(len(df)):
+        print(df.datetime[idx])
+
     
     plt.plot(df['high'])
     plt.grid(True)
