@@ -23,15 +23,17 @@ dir_list = get_files()
 for f in dir_list:
     print(f)
     df = pd.read_csv(os.path.join(config.config['hist_data_dir'], f))
+    print(df.columns)
+    
     plt.plot(df['high'])
     plt.grid(True)
     plt.show()
 
 
-filename = 'EURUSD-2019-03.csv'
-full_path = r'C:\Users\Yochanan\Documents\Data\EURUSD'
-df = pd.read_csv(os.path.join(full_path, filename))
-print(df.columns)
+# filename = 'EURUSD-2019-03.csv'
+# full_path = r'C:\Users\Yochanan\Documents\Data\EURUSD'
+# df = pd.read_csv(os.path.join(full_path, filename))
+# print(df.columns)
 
 # highs = df['datetime'].between('20190203','20190202')
 # plt.plot(df['high'].values[highs])
