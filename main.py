@@ -29,12 +29,6 @@ for f in dir_list:
     plt.grid(True)
     plt.show()
 
-
-# filename = 'EURUSD-2019-03.csv'
-# full_path = r'C:\Users\Yochanan\Documents\Data\EURUSD'
-# df = pd.read_csv(os.path.join(full_path, filename))
-# print(df.columns)
-
 # highs = df['datetime'].between('20190203','20190202')
 # plt.plot(df['high'].values[highs])
 
