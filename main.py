@@ -23,11 +23,6 @@ dir_list = get_files()
 for f in dir_list:
     print(f)
     df = pd.read_csv(os.path.join(config.config['hist_data_dir'], f))
-    print(df.columns)
-    
-    plt.plot(df['high'])
-    plt.grid(True)
-    plt.show()
 
 
 # filename = 'EURUSD-2019-03.csv'
