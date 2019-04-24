@@ -23,6 +23,8 @@ dir_list = get_files()
 for f in dir_list:
     print(f)
     df = pd.read_csv(os.path.join(config.config['hist_data_dir'], f))
+    for idx in range(len(df)):
+        print(df.datetime[idx])
     print(df.columns)
     
     plt.plot(df['high'])
