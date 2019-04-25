@@ -8,5 +8,7 @@ config = {
 
 ssa_params = {
     'MAX_LAG_NUMBER': 100,
-    'samples_to_predict': 20
+    'samples_to_predict': 20,
+    'plots': False,
+    'analysis': False
 }
