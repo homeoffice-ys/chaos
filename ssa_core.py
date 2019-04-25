@@ -291,4 +291,4 @@ def ssa_main(train_d, test_d):
         plt.legend()
         plt.show()
 
-    return
+    return mape(forecast, test_d)

@@ -16,9 +16,8 @@ for f in dir_list:
 
     for idx in range(len(df)):
         print(df.datetime[idx])
-        test_date = df['datetime'].values[800000] # '20190201 16:19:50.787'
         train_d = df.values
         test_d = df.values
-        ssa_main(train_d, test_d)
+        err = ssa_main(train_d, test_d)
 
 
