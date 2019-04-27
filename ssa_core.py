@@ -7,6 +7,20 @@
 import scipy.linalg as linalg
 import scipy.stats as stats
 import numpy as np
+import config
+
+MAX_LAG_NUMBER = config.ssa_params['MAX_LAG_NUMBER']
+samples_to_predict = config.ssa_params['samples_to_predict']
+
+def mape(f, t):
+
+    return 100*((f - t)/t).abs().sum()/len(t)
+
+
+def mae(f, t):
+
+    return 100*(f - t).abs().sum()/len(t)
+
 
 try:
     from matplotlib import pyplot as plt
@@ -249,3 +263,32 @@ def ssaview(y, dim, k):
     plt.ylabel('Eigenvalue')
 
     plt.show()
+
+
+def ssa_main(train_d, test_d):
+
+    if config.ssa_params['plots']:
+        plt.plot(train_d, label='Train')
+        plt.plot(test_d, 'r', label='Test')
+        plt.legend()
+        plt.show()
+
+        ssaview(train_d, MAX_LAG_NUMBER, [0, 1, 2, 3])
+
+    if config.ssa_params['analysis']:
+        pc, _, v = ssa(train_d, MAX_LAG_NUMBER)
+        reconstructed = inv_ssa(pc, v, [0, 1, 2, 3])
+        noise = train_d - reconstructed
+        plt.hist(noise, 50)
+        plt.show()
+
+    n_co = ssa_cutoff_order(train_d, dim=MAX_LAG_NUMBER, show_plot=True)
+    forecast = ssa_predict(train_d.values, n_co, list(range(8)), samples_to_predict, 1e-5)
+
+    if config.ssa_params['plots']:
+        plt.plot(forecast, label='forecast')
+        plt.plot(test_d.values[:samples_to_predict], label='actual')
+        plt.legend()
+        plt.show()
+
+    return mape(forecast, test_d)
