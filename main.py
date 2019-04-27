@@ -9,15 +9,18 @@ from offline import get_files
 
 
 dir_list = get_files()
+start_time = None
 
 for f in dir_list:
     df = pd.read_csv(os.path.join(config.config['hist_data_dir'], f))
     print(df.columns)
 
     for idx in range(len(df)):
-        print(df.datetime[idx])
-        train_d = df.values
-        test_d = df.values
-        err = ssa_main(train_d, test_d)
+        if start_time is None:
+            start_time = pd.to_datetime(df.datetime[idx])
+        print(pd.to_datetime(df.datetime[idx]) - start_time)
+        # train_d = df.values
+        # test_d = df.values
+        # err = ssa_main(train_d, test_d)
 
 
