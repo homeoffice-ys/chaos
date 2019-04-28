@@ -18,7 +18,7 @@ for f in dir_list:
     for idx in range(len(df)):
         if start_time is None:
             start_time = pd.to_datetime(df.datetime[idx])
-        print(pd.to_datetime(df.datetime[idx]) - start_time)
+        print((pd.to_datetime(df.datetime[idx]) - start_time).total_seconds())
         # train_d = df.values
         # test_d = df.values
         # err = ssa_main(train_d, test_d)
