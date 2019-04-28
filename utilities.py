@@ -1,5 +1,6 @@
 import math
 
+
 def configurations():
 
     config = {'window': 10,
@@ -16,6 +17,9 @@ class RunningStats:
         self.new_m = 0
         self.old_s = 0
         self.new_s = 0
+        self.old_val = 0
+        self.new_val = 0
+        self.cum_val = 0
 
     def clear(self):
         self.n = 0
@@ -26,12 +30,17 @@ class RunningStats:
         if self.n == 1:
             self.old_m = self.new_m = x
             self.old_s = 0
+            self.new_val = x
+            self.old_val = 0
         else:
             self.new_m = self.old_m + (x - self.old_m) / self.n
             self.new_s = self.old_s + (x - self.old_m) * (x - self.new_m)
 
             self.old_m = self.new_m
             self.old_s = self.new_s
+            self.cum_val = self.delta() + (x - self.old_val)
+            self.old_val = self.new_val
+            self.new_val = x
 
     def mean(self):
         return self.new_m if self.n else 0.0
@@ -41,3 +50,6 @@ class RunningStats:
 
     def standard_deviation(self):
         return math.sqrt(self.variance())
+
+    def delta(self):
+        return self.new_val - self.old_val if self.n > 1 else 0.0

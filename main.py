@@ -22,7 +22,8 @@ for f in dir_list:
             start_time = pd.to_datetime(df.datetime[idx])
         print((pd.to_datetime(df.datetime[idx]) - start_time).total_seconds())
         rs.push(df['high'].values[idx])
-        print('High = %2.5f, Mean = %2.5f, Std = %2.5f' % (df['high'].values[idx], rs.mean(), rs.standard_deviation()))
+        print('High = %2.5f, Mean = %2.5f, Delta = %2.5f, Std = %2.5f' %
+              (df['high'].values[idx], rs.mean(), rs.delta(), rs.standard_deviation()))
         # train_d = df.values
         # test_d = df.values
         # err = ssa_main(train_d, test_d)
