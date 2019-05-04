@@ -1,4 +1,34 @@
 import math
+import matplotlib.pyplot as plt
+import matplotlib.dates as mdates
+import pandas as pd
+
+
+def cool_plot(df):
+
+    spread = df['high'] - df['low']
+    dated = df['datetime']
+    date = pd.to_datetime(dated)
+    fig, ax1 = plt.subplots()
+    ax1.plot(date, df['high'])
+    ax1.plot(date, df['low'])
+    plt.gca().get_yaxis().get_major_formatter().set_useOffset(False)
+    ax1.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
+    ax1.locator_params(nbins=30, axis='x')
+
+    max_xticks = 30
+    xloc = plt.MaxNLocator(max_xticks)
+    ax1.xaxis.set_major_locator(xloc)
+
+    for label in ax1.xaxis.get_ticklabels():
+        label.set_rotation(45)
+
+    # ax1_2 = ax1.twinx()
+    # ax1_2.xaxis.set_major_locator(xloc)
+    # ax1_2.fill_between(date, 0, spread,  interpolate=True, facecolor='g', alpha=.3)
+    plt.grid(True)
+    plt.subplots_adjust(bottom=.2)
+    plt.show()
 
 
 def configurations():
@@ -53,3 +83,7 @@ class RunningStats:
 
     def delta(self):
         return self.new_val - self.old_val if self.n > 1 else 0.0
+
+
+
+
